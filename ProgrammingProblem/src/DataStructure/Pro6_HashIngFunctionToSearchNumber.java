@@ -1,4 +1,5 @@
 package com.bridgelabz.data_structure;
+
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.FileNotFoundException;
@@ -12,13 +13,14 @@ import com.bridgelabz.data_structure.utility.Linkedlist;
 
 public class Pro6_HashIngFunctionToSearchNumber 
 {
-	
-
+		// creating a new slot in linked list
 		public static Linkedlist slot[] = new Linkedlist[11];
 
-		public static void main(String[] args) throws FileNotFoundException {
-			String path = "/home/admin1/Desktop/Java/Num.txt";
-			for (int i = 0; i < 11; i++) {
+		public static void main(String[] args) throws FileNotFoundException 
+		{
+			String path = "/home/admin1/Desktop/Java/Num.txt";   //file path
+			for (int i = 0; i < 11; i++)   //creating a number of slots
+			{
 				slot[i] = new Linkedlist();
 			}
 
@@ -28,16 +30,18 @@ public class Pro6_HashIngFunctionToSearchNumber
 
 				System.out.println(str);
 
-				String[] strA = str.split(" ");
-				for (int i = 0; i < strA.length; i++) {
-					int slotNum = hash(strA[i]);
+				String strA[]= str.split(" ");   //splitting string
+				for (int i = 0; i < strA.length; i++)
+				{
+					int slotNum = hash(strA[i]);   // converting datatype string to integer
 					slot[slotNum].add(strA[i]);
 					// System.out.print(slot[slotNum]);
 				}
 
 				System.out.println();
-
-				for (int i = 0; i < 11; i++) {
+				//printing  
+				for (int i = 0; i < 11; i++) 
+				{
 					System.out.print(i + "==> ");
 					slot[i].displayList();
 				}
@@ -46,10 +50,12 @@ public class Pro6_HashIngFunctionToSearchNumber
 				String key = sc.nextLine();
 				int slotNumber = hash(key);
 				boolean value = slot[slotNumber].search(key);
-				if (value) {
+				if (value) 
+				{
 					System.out.println("\nElement found at slot " + slotNumber + " and deleted\n");
 					slot[slotNumber].remove(key);
-				} else {
+				} else 
+				{
 					System.out.println("\nElement not found but added: " + key + " at slot " + slotNumber + "\n");
 					slot[slotNumber].add(key);
 				}
