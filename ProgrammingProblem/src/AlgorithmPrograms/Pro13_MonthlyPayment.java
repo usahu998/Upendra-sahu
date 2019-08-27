@@ -1,21 +1,20 @@
-package AlgorithmPrograms;
+package com.bridgelabz.algorithm;
 
-import java.util.Scanner;
+
+import com.bridgelabz.utility.ScannerInput;
+import com.bridgelabz.utility.Utility;
 
 public class Pro13_MonthlyPayment {
 
 	public static void main(String[] args) 
 	{
-		Scanner sc=new Scanner(System.in);
 		System.out.println("Enter principal");
-		int p=sc.nextInt();
+		int p=ScannerInput.intInput();
 		System.out.println("Enter Rate");
-		double R=sc.nextDouble();
+		double r=ScannerInput.doubleInput();
 		System.out.println("Enter year");
-		int y=sc.nextInt();
+		int y=ScannerInput.intInput();
 		
-		Utility u=new Utility();
-		u.isMonthlySalary(p,R,y);
+		System.out.println("Monthly payment is = " + Utility.isMonthlySalary(p,r,y));
 	}
-
 }

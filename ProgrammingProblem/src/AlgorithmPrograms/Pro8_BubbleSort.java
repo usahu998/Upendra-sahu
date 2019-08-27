@@ -1,11 +1,15 @@
-package AlgorithmPrograms;
+
+package com.bridgelabz.algorithm;
 
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
 
+import com.bridgelabz.utility.Utility;
+
 public class Pro8_BubbleSort {
 
+	@SuppressWarnings("resource")
 	public static void main(String[] args)throws Exception 
 	{ 
 		 
@@ -65,8 +69,7 @@ public class Pro8_BubbleSort {
 		ar[co]=v;
 		
 		
-		Utility u=new Utility();
-		u.bubbleSort(ar);
+		Utility.bubbleSort(ar);
 		
 		
 	}

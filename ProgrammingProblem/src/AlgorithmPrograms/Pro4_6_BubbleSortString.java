@@ -1,47 +1,28 @@
-package AlgorithmPrograms;
+package com.bridgelabz.algorithm;
 
-import java.util.Scanner;
+
+import com.bridgelabz.utility.ScannerInput;
+import com.bridgelabz.utility.Utility;
 
 public class Pro4_6_BubbleSortString 
 {
-
 	public static void main(String[] args) 
 	{
-		Scanner sc=new Scanner(System.in);
 		long startTime=System.currentTimeMillis();
 		System.out.println("Enter any String");
-		String str=sc.nextLine();
-		String a[]=str.split(" ");
-		Utility u=new Utility();
-		u.bubbleSortString(a);
+		String str=ScannerInput.strInput();
+		String[] stringArray=str.split(" ");
 		
-		String temp;
+		String[] bubbleSortArrayUtility=Utility.bubbleSortString(stringArray);
 		
-		for (int i = 0; i < a.length; i++) 
-		{
-			for (int j = i+1; j < a.length; j++) 
-			{
-				if(a[i].compareToIgnoreCase(a[j])>0)
-				{
-					temp=a[i];
-					a[i]=a[j];
-					a[j]=temp;
-				}
-				
-			}
-			
-		}
 		System.out.println("After Sorting");
-		for (int i = 0; i < a.length; i++) 
+		for (int i = 0; i < bubbleSortArrayUtility.length; i++) 
 		{
-			System.out.print(a[i]+" ");
-			
+			System.out.print(bubbleSortArrayUtility[i]+" ");
 		}
 		
 		long stopTime=System.currentTimeMillis();
-		long Time=stopTime-startTime;
-		System.out.println(" elapsed time performance  "+ Time);
-
+		long time=stopTime-startTime;
+		System.out.println(" elapsed time performance  "+ time);
 	}
-
 }

@@ -1,23 +1,20 @@
-package AlgorithmPrograms;
+package com.bridgelabz.algorithm;
 
-
-import java.util.Scanner;
+import com.bridgelabz.utility.ScannerInput;
+import com.bridgelabz.utility.Utility;
 
 public class Pro4_4_InsertionSortString {
 
-	public static void main(String[] args) 
-	{
-		Scanner sc=new Scanner(System.in);
-		long startTime=System.currentTimeMillis();
+	public static void main(String[] args) {
+		long startTime = System.currentTimeMillis();
 		System.out.println("Enter any string");
-		String str=sc.nextLine();
-		String a[]=str.split(" ");
-		Utility u=new Utility();
-		u.isInsertionSortString(a);
-	
-		long stopTime=System.currentTimeMillis();
-		long Time=stopTime-startTime;
-		System.out.println(" elapsed time performance  "+ Time);
+		String str = ScannerInput.strInput();
+		String[] strArray = str.split(" ");
+		Utility.isInsertionSortString(strArray);
+
+		long stopTime = System.currentTimeMillis();
+		long time = stopTime - startTime;
+		System.out.println(" elapsed time performance  " + time);
 	}
 
 }

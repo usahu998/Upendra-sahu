@@ -1,4 +1,4 @@
-package AlgorithmPrograms;
+package com.bridgelabz.algorithm;
 
 public class DEMO {
 

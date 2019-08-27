@@ -1,22 +1,19 @@
-package AlgorithmPrograms;
+package com.bridgelabz.algorithm;
 
-import java.util.Scanner;
+import com.bridgelabz.utility.ScannerInput;
+import com.bridgelabz.utility.Utility;
 
 public class Pro12_TemperatureConversion {
 
-	public static void main(String[] args)
-	{
-		Scanner sc=new Scanner(System.in);
+	public static void main(String[] args) {
 		System.out.println("Enter  celsius ");
-		int c=sc.nextInt();
-		int f=(c*9/5)+32;
-		System.out.println("Celsius To Fahrenheit is "+f);
-		int z=(f-32)*5/9;
-		System.out.println("Fahrenheit To Celsius is "+z);
-		
-		
-		
+		int celsius = ScannerInput.intInput();
 
+		System.out.println("Celsius To Fahrenheit is " + Utility.CelToFahren(celsius));
+
+		System.out.println("Enter  fahrenheit ");
+		int fahrenheit = ScannerInput.intInput();
+
+		System.out.println("Fahrenheit To Celsius is " + Utility.fahrenToCel(fahrenheit));
 	}
-
 }

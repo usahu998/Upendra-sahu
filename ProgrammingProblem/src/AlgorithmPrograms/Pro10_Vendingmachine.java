@@ -1,6 +1,6 @@
-package AlgorithmPrograms;
+package com.bridgelabz.algorithm;
 
-import java.util.Scanner;
+import com.bridgelabz.utility.ScannerInput;
 
 public class Pro10_Vendingmachine
 {
@@ -40,11 +40,10 @@ public class Pro10_Vendingmachine
   	// Starting Main Function
 	public static void main(String[] args)
 	{
-        Scanner sc=new Scanner(System.in);
 
 		//ask the user enter the money
 		System.out.print("Enter the Amount:");
-		int money=sc.nextInt(); 
+		int money=ScannerInput.intInput();
 
 		// Creating The Object of Vending MAchine class
 		Pro10_Vendingmachine.calculate(money,notes);

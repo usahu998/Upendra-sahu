@@ -1,4 +1,4 @@
-package AlgorithmPrograms;
+package com.bridgelabz.algorithm;
 
 import java.io.BufferedReader;
 import java.io.File;
@@ -8,12 +8,15 @@ import java.util.Scanner;
 
 public class Pro6_BinarySearcWordList 
 {
+	@SuppressWarnings("resource")
 	public static void main(String[] args)throws Exception 
 	{ 
-		 Scanner sc=new Scanner(System.in);
+		
+		Scanner sc=new Scanner(System.in);
 		 System.out.println("Enter word you want to search");
 		 String key=sc.nextLine();
-		  File file = new File("D:\\BL\\List.txt"); 
+		 String pathname="/home/admin1/Desktop/Java/List.txt";
+		  File file = new File(pathname); 
 		  
 		  BufferedReader br = new BufferedReader(new FileReader(file)); 
 		  String a[]=new String[100000];

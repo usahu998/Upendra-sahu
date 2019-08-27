@@ -1,19 +1,18 @@
-package AlgorithmPrograms;
+package com.bridgelabz.algorithm;
 
-import java.util.Scanner;
+import com.bridgelabz.utility.ScannerInput;
 
 public class Pro16_BinarySwap {
 
 	public static void main(String[] args)
 	{
-		Scanner sc=new Scanner(System.in);
 		System.out.println("Enter any number");
-		int n=sc.nextInt();
+		int n=ScannerInput.intInput();
 		if(n<=255)
 		{
 		String str=Integer.toBinaryString(n);
 		System.out.println(str);
-		int d=Integer.parseInt(str);
+	//	int d=Integer.parseInt(str);
 		char ch[]=str.toCharArray();
 		char a[]=new char[8];
 		
@@ -35,20 +34,21 @@ public class Pro16_BinarySwap {
 		}
 		
 		System.out.println();
-		String add1="";
-		String add2="";
+		String nibble1="";
+		String nibble2="";
+		//separating nibble
 		for (int i = 0; i < a.length; i++)
 		{
 			if(i<4)
-			add1=add1+a[i];
+			nibble1=nibble1+a[i];
 			else
-				add2=add2+a[i];
+				nibble2=nibble2+a[i];
 		}
-		System.out.println("First  nibble"+add1);
-		System.out.println("Second nibble "+add2);
+		System.out.println("First  nibble"+nibble1);
+		System.out.println("Second nibble "+nibble2);
 		
 		String swap;
-		swap=add2+add1;
+		swap=nibble2+nibble1;     //comcatinating both nibble
 		System.out.println("Swapping From First Nibble to Second Nibble");
 		System.out.println(swap);
 		int bin=Integer.parseInt(swap);

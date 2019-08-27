@@ -1,28 +1,20 @@
-package AlgorithmPrograms;
+package com.bridgelabz.algorithm;
 
-import java.util.Arrays;
-import java.util.Scanner;
+import com.bridgelabz.utility.ScannerInput;
+import com.bridgelabz.utility.Utility;
 
-public class Pro4_3_InsertionSortInteger
-{
+public class Pro4_3_InsertionSortInteger {
 
-	public static void main(String[] args)
-	{
-		Scanner sc=new Scanner(System.in);
-		long startTime=System.currentTimeMillis();
+	public static void main(String[] args) {
+		long startTime = System.currentTimeMillis();
 		System.out.println("Enter number of element ");
-		int n=sc.nextInt();
-		int a[]=new int[n];
-		System.out.println("Enter "+n+" element");
-		for (int i = 0; i < a.length; i++) 
-		{
-			a[i]=sc.nextInt();
-		}
-		Utility u = new Utility();
-		u.insertionSortInteger(a);
-		long stopTime=System.currentTimeMillis();
-		long Time=stopTime-startTime;
-		System.out.println(" elapsed time performance  "+ Time);
+		int num = ScannerInput.intInput();
+
+		int[] intArray = Utility.getIntArray(num);
+		Utility.insertionSortInteger(intArray);
+		long stopTime = System.currentTimeMillis();
+		long time = stopTime - startTime;
+		System.out.println(" elapsed time performance  " + time);
 
 	}
 
