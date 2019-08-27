@@ -1,37 +1,16 @@
-package FunctionProgramming;
-
-import java.util.Scanner;
+package com.brideglabz.functionprogramming;
+import com.bridgelabz.utility.ScannerInput;
+import com.bridgelabz.utility.Utility;
 
 public class Pro3_LeapYear {
 
-	public static void main(String[] args)
-	{
-		Scanner sc=new Scanner(System.in);
+	public static void main(String[] args) {
 		System.out.println("Enter year it is a 4 digit number ");
-		int n=sc.nextInt();
+		int year = ScannerInput.intInput();
 		
-		leapYear(n);
-		
-	}
-	
-	static void leapYear(int n)
-	{
-		if(n>999 && n<=9999)
-		{
-			if(n%400==0 || n%4==0 && n%100!=0)
-			{
-				System.out.println(n+" is a leap year ");
-			}
-			else
-			{
-				System.out.println(n+" is not a leap year");
-			}
-		}
+		if (Utility.leapYear(year))
+			System.out.println(year + "is a leap year");
 		else
-		{
-			System.out.println("invalid year");
-		}
-
+			System.out.println(year + "is a not leap year ");
 	}
-
 }

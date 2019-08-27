@@ -1,7 +1,9 @@
-package FunctionProgramming;
+package com.brideglabz.functionprogramming;
 
 import java.io.PrintWriter;
 import java.util.Scanner;
+
+import com.bridgelabz.utility.Utility;
 
 public class Pro9_2DArray 
 {
@@ -15,89 +17,49 @@ public class Pro9_2DArray
 		System.out.println("Enter Number of Columns ");
 		int n=sc.nextInt();
 		
-		int a[][]=new int[m][n];
-		double b[][]=new double[m][n];
-		String c[][]=new String[m][n];
+		int[][] intArray=new int[m][n];
+		double[][] doubleArray=new double[m][n];
+		String[][] stringArray=new String[m][n];
 		
-		isIntegerArray(a);
-		isDoubleArray(b);
-		isBooleanArray(c);
+		Utility.isIntegerArray(intArray);
+		Utility.isDoubleArray(doubleArray);
+		Utility.isBooleanArray(stringArray);
 		
-		display(a,b,c);
-
+		display(intArray,doubleArray,stringArray);
 	}
 	
-	 public static int[][] isIntegerArray(int a[][])
-	{
-		 System.out.println("Enter Integer element");
-		for (int i = 0; i < a.length; i++) 
-		{
-			for (int j = 0; j < a.length; j++) 
-			{
-				a[i][j]=sc.nextInt();
-			}
-		}
-		return a;
-	}
+	
 	 
-	 public static double[][] isDoubleArray(double b[][])
-		{
-		 System.out.println("Enter Double Element");
-			for (int i = 0; i < b.length; i++) 
-			{
-				for (int j = 0; j < b.length; j++) 
-				{
-					b[i][j]=sc.nextDouble();
-				}
-				
-			}
-			return b;
-		}	
-	 
-	 public static String[][] isBooleanArray(String c[][])
-		{
-		 System.out.println("Enter Boolean Element");
-			for (int i = 0; i < c.length; i++) 
-			{
-				for (int j = 0; j < c.length; j++) 
-				{
-					c[i][j]=sc.next();
-				}
-				
-			}
-			return c;
-		}	
-	 
-	 static void display(int a[][],double b[][],String c[][])
+	 static void display(int[][] intArray,double[][] doubleArray,String[][] stringArray)
 	 {
 		 PrintWriter pw=new PrintWriter(System.out,true);
 		 
 		 pw.println("2D Integer Array Element are");
-		 for (int i = 0; i < a.length; i++) 
+		 for (int i = 0; i < intArray.length; i++) 
 		 {
-			 for (int j = 0; j < a.length; j++) 
+			 for (int j = 0; j < intArray.length; j++) 
 			 {
-				 pw.print(a[i][j]+" ");
+				 pw.print(intArray[i][j]+" ");
 			}
 			pw.println();
 			
 		}
 		 pw.println("2D Double Array Element are");
-		 for (int i = 0; i < b.length; i++) 
+		 for (int i = 0; i < doubleArray.length; i++) 
 		 {
-			 for (int j = 0; j < b.length; j++) 
+			 for (int j = 0; j < doubleArray.length; j++) 
 			 {
-				 pw.print(b[i][j]+" ");
+				 pw.print(doubleArray[i][j]+" ");
 			}
 			pw.println();
 			
 		}
 		 pw.println("2D Boolean Array Element are");
-		 for (int i = 0; i < c.length; i++) 
+		 for (int i = 0; i < stringArray.length; i++) 
 		 {
-			 for (int j = 0; j < c.length; j++) 
+			 for (int j = 0; j < stringArray.length; j++) 
 			 {
-				 pw.print(c[i][j]+" ");
+				 pw.print(stringArray[i][j]+" ");
 			}
 			pw.println();
 			
