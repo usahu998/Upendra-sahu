@@ -1,0 +1,35 @@
+import java.awt.*;
+import java.awt.event.*;
+public class Reg extends Frame implements ActionListener
+{
+              
+         public void actionperformed(ActionEvent ae)
+   
+       if (ae.getSource()==b1)
+       {
+           System.out.println("submitted"); 
+       }
+       if (ae.getSource()==b2)
+       {
+           
+       }
+       
+   }
+
+and
+
+
+    private static class b1 extends Button 
+    {
+
+        public b1() 
+        {
+        }
+    }
+    private static class b2 extends Button 
+    {
+        public b2()
+        {
+            
+        }
+    }
