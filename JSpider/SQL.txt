@@ -1,0 +1,5 @@
+write a query to display scott manager managers dept name
+WAQ to list all employee who are earning same salary
+display 1st and last record
+display the depart name from dept table with out using joins
+waq to list all employee whose name is a palindrome
