@@ -1,5 +1,4 @@
-package Ctest.CliniqueManagement;
-
+package com.bridgelabz.oops.CliniqueManagement;
 
 
 public class Doctor 
