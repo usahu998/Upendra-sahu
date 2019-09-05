@@ -1,4 +1,4 @@
-package Ctest.CliniqueManagement;
+package com.bridgelabz.oops.CliniqueManagement;
 
 import java.util.ArrayList;
 import java.util.Date;
