@@ -40,7 +40,7 @@ public class RegexUtil
 	
 	public static String date(String date)
 	{
-		Pattern p=Pattern.compile("([0-2][0-9]|[3][1-2])[/]([0][1-9]|[1][1-2][/][0-9]{4}");
+		Pattern p=Pattern.compile("([0-2][0-9]|[3][1-2])[/]([0][1-9]|[1][1-2])[/][0-9]{4}");
 		Matcher m=p.matcher(date);
 		if (m.find()&&m.group().equals(date))
 			System.out.println("Valid date");
