@@ -11,6 +11,7 @@ import org.json.simple.parser.JSONParser;
 
 import com.bridgelabz.oops.jsonInventory.model.Inventory;
 import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 
 
 
@@ -88,7 +89,8 @@ public  class InventoryManagementImp implements InventoryManagement
 		
 
 		public void writeJson() {
-			Gson gson = new Gson();
+			//Gson gson = new Gson();
+			Gson gson= new GsonBuilder().setPrettyPrinting().create();
 			String json = gson.toJson(inventories);
 
 			try (FileWriter file = new FileWriter(
