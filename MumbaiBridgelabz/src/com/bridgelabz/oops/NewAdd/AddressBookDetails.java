@@ -6,13 +6,7 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.Comparator;
-import java.util.HashSet;
-import java.util.Iterator;
-import java.util.List;
-import java.util.Set;
 
-import javax.swing.text.html.HTMLDocument.HTMLReader.PreAction;
 
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
@@ -23,7 +17,7 @@ import com.bridgelabz.oops.Basics.Employee;
 import com.bridgelabz.utility.Utility;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
-import com.google.gson.JsonObject;
+
 
 public class AddressBookDetails implements AddressBookInterface {
 
