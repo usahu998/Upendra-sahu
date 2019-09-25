@@ -1,0 +1,328 @@
+public interface MyProvider {
+	
+	String uname="root";
+	String upass="admin@123456";
+	String connUrl="jdbc:mysql://localhost:3306/userdb";
+
+}
+================================================
+import java.sql.Connection;
+import java.sql.DriverManager;
+
+public class MyConnectionProvider implements MyProvider {
+	
+static Connection con=null;
+
+public static Connection getCon()
+{
+	try {
+		Class.forName(" com.mysql.cj.jdbc.Driver");
+		con = DriverManager.getConnection("connUrl,uname,upass");
+	} catch (Exception e) {
+		System.out.println(e);
+	}
+	return con;
+	}
+}
+==========================================================
+
+public class User {
+	
+	private String username;
+	private String password;
+	private String cpassword;
+	private String firstName;
+	private String lastName;
+	private String email;
+	private long phoneNumber;
+	public String getUsername() {
+		return username;
+	}
+	public void setUsername(String username) {
+		this.username = username;
+	}
+	public String getPassword() {
+		return password;
+	}
+	public void setPassword(String password) {
+		this.password = password;
+	}
+	public String getCpassword() {
+		return cpassword;
+	}
+	public void setCpassword(String cpassword) {
+		this.cpassword = cpassword;
+	}
+	public String getFirstName() {
+		return firstName;
+	}
+	public void setFirstName(String firstName) {
+		this.firstName = firstName;
+	}
+	public String getLastName() {
+		return lastName;
+	}
+	public void setLastName(String lastName) {
+		this.lastName = lastName;
+	}
+	public String getEmail() {
+		return email;
+	}
+	public void setEmail(String email) {
+		this.email = email;
+	}
+	public long getPhoneNumber() {
+		return phoneNumber;
+	}
+	public void setPhoneNumber(long phoneNumber) {
+		this.phoneNumber = phoneNumber;
+	}
+	
+
+}
+==============================================================
+public interface UserDAO {
+    
+	public int insertUser(User u);
+	public User getUser(String username,String pass);
+	
+}
+===============================================================
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+
+
+
+public class UserDAOImpl implements UserDAO {
+
+	static Connection con;
+	static PreparedStatement ps;
+	@Override
+	public int insertUser(User u) {
+		int status=0;
+		try {
+			con=MyConnectionProvider.getCon();
+			ps=con.prepareStatement("insert into user_info values(?,?,?,?,?,?,?)");
+			ps.setString(1, u.getUsername());
+			ps.setString(2, u.getPassword());
+			ps.setString(3, u.getCpassword());
+			ps.setString(4, u.getFirstName());
+			ps.setString(5, u.getLastName());
+			ps.setString(6, u.getEmail());
+			ps.setLong(7, u.getPhoneNumber());
+			
+			status=ps.executeUpdate();
+			con.close();
+			
+			
+		} catch (Exception e) {
+System.out.println(e);	
+}
+		return status;
+	}
+
+	@Override
+	public User getUser(String username, String pass) {
+
+		User u=new User();
+		
+		try {
+			
+			con=MyConnectionProvider.getCon();
+			ps=con.prepareStatement("select * from user_info where uname=? and upass=?");
+			ps.setString(1, username);
+			ps.setString(2, pass);
+			
+			ResultSet rs=ps.executeQuery();
+			while(rs.next())
+			{
+				u.setUsername(rs.getString(1));
+				u.setPassword(rs.getString(2));
+				u.setCpassword(rs.getString(3));
+				u.setFirstName(rs.getString(4));
+				u.setLastName(rs.getString(5));
+				u.setEmail(rs.getString(6));
+				u.setPhoneNumber(rs.getLong(7));
+				
+			}
+			
+		} catch (Exception e) {
+System.out.println(e);		}
+		return null;
+	}
+
+	
+	
+	
+
+}
+======================================================================
+import java.io.IOException;
+import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+ 
+@WebServlet("/LoginCheck")
+public class LoginCheck extends HttpServlet {
+	private static final long serialVersionUID = 1L;
+       
+    
+    public LoginCheck() {
+        super();
+        // TODO Auto-generated constructor stub
+    }
+
+	
+	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException,NullPointerException {
+	UserDAO ud=new UserDAOImpl();
+	String userName=request.getParameter("uname");
+	String password=request.getParameter("password");
+	String submitType=request.getParameter("submit");
+	User u=ud.getUser(userName, password);
+	if(submitType.equals("login") && u!=null && u.getUsername()!=null)
+	{
+		request.setAttribute("message",u.getUsername());
+		request.getRequestDispatcher("member.jsp").forward(request, response);
+		
+		
+	}else if(submitType.equals("register"))
+	{
+	
+		u.setFirstName(request.getParameter("fname"));
+		u.setPassword(password);
+		u.setUsername(userName);
+		request.setAttribute("successmessage","Registration Done , please Login to continue  !!!");
+		request.getRequestDispatcher("Login.jsp").forward(request, response);
+		
+	}else {
+		request.setAttribute("message","Data Not Found,click on Register  !!!");
+		request.getRequestDispatcher("Login.jsp").forward(request, response);
+	}
+	
+	}
+
+}
+==================================================
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://xmlns.jcp.org/xml/ns/javaee" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_4_0.xsd" version="4.0">
+  <display-name>SimpleLogin</display-name>
+  <welcome-file-list>
+    <welcome-file>WebHome.jsp</welcome-file>
+    <welcome-file>index.htm</welcome-file>
+   
+  </welcome-file-list>
+</web-app>
+========================================================
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Web Home Page </title>
+</head>
+<body bgcolor="#0EC8D8">
+<h1 style="background-color:#7FFFD4">WebHome</h1>
+
+<br> <a  style="margin-left: 148px; color:black;" href="Login.jsp" > Login </a>
+<br>
+<br>
+<br> <a  style="margin-left: 148px; color:red;" href="Registration.jsp" >Registration</a>
+</body>
+</html>
+====================================================
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body bgcolor="#0EC8D8">
+	<h1 style="background-color: #7FFFD4">Login Page</h1>
+
+	<form method="post" action="LoginCheck">
+        <h3 Style="color:red;">${message} </h3>
+        <h3 Style="color:green;">${successmessage} </h3>
+
+
+		User Name <input type="text" name="uname"
+			placeholder="Enter User name"> <br> <br> 
+			Password <input
+			style="margin-left: 10px" type="password" name="password"
+			placeholder="**********">
+			 <br> <br> <input
+			style="margin-left: 150px" type="submit" name="submit" value="login"> <input
+			style="margin-left: 10px" style="color:red;" type="reset"
+			value="Clear"> <br> <br> <a
+			style="margin-left: 148px; color: red;" href="">Forget Password
+		</a>
+	</form>
+</body>
+</html>
+==============================================================
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body bgcolor="#05A1F5">
+<form method="post" action="LoginCheck">
+<h1 style="background-color:#7FFFD4"> Registration Form </h1>
+	
+	
+User name      :<input style="margin-left: 3%" type="text" name="userid" /><br/><br/>
+password       :<input style="margin-left: 4%" type="password" name="pwd" /><br/><br/>
+Confirm password:<input style="margin-left: 0%" type="password" name="cpwd" /><br/><br/>
+First name     :<input style="margin-left: 3%" type="text" name="fname" /><br/><br/>
+Last name      :<input style="margin-left: 3%" type="text" name="lname" /><br/><br/>
+Email          :<input style="margin-left: 5%" type="text" name="email" /><br/><br/>
+PhoneNumber    :<input style="margin-left: 1%" type="text" name="pnumber" /><br/><br/>
+<br/><br/>
+
+<input style="margin-left: 200px" type="submit" name="submit" value="register"/>
+	
+
+</form>form>
+</body>
+</html>
+============================================================
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+<form method="post" action="LoginCheck">
+<a  style="margin-left: 95%; color:Tomato;" href="WebHome.jsp" > Logout </a>
+Welcome you are logged in 
+<h1> Hi ${message}!!</h1>
+</form>
+</body>
+</html>
+==============================================
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+Unsuccessful Login
+</body>
+</html>
+===========================================================
+
