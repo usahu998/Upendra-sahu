@@ -1,0 +1,160 @@
+#!/bin/bash -x
+
+echo "Tic Tac Toe Game"
+
+NUM_ROWS=3
+NUM_COLUMNS=3
+EMPTY=' '
+
+PLAYER_SYMBOL=''
+COMP_SYMBOL=''
+
+declare -A gameBoard
+num=9
+#VARIABLES
+whoPlays=0
+
+declare -A gameBoard
+
+function initalizingBoard()
+{
+	for ((i=1;i<=NUM_ROWS;i++))
+	do
+		for ((j=1;j<=NUM_COLUMNS;j++))	
+		do
+			gameBoard[$i,$j]=$EMPTY
+		done
+	done
+}
+
+function symbolAssignment()
+{
+	firstPlay=$((RANDOM%2))
+
+	if [ $firstPlay -eq 1 ]
+	then
+		(( whoPlays++ ))
+		PLAYER_SYMBOL='X'
+		COMP_SYMBOL='O'
+		echo "Player symobol : X | Computer symbol : O"
+		checkTurn $PLAYER_SYMBOL $COMP_SYMBOL
+	else
+		PLAYER_SYMBOL='O'
+		COMP_SYMBOL='X'
+		echo "Player symobol : O | Computer symbol : X"
+		checkTurn $PLAYER_SYMBOL $COMP_SYMBOL
+	fi
+}
+
+function checkTurn()
+{
+	playerStart=$((RANDOM%2))
+
+	if [ 1 -eq 1 ]
+	then
+		PLAYER_SYMBOL=$1
+		COMP_SYMBOL=$2
+		echo "Player Play First"
+		displayBoard
+		ticTacToe
+	else
+		break
+		PLAYER_SYMBOL=$1
+		COMP_SYMBOL=$2
+		echo "Computer Play First"
+		displayBoard
+	fi
+}
+
+function displayBoard()
+{
+	for ((i=1;i<=NUM_ROWS;i++))
+	do
+		for ((j=1;j<=NUM_COLUMNS;j++))
+		do
+		echo -n 	"|" "${gameBoard[$i,$j]}"  "|"
+		done
+		printf "\n"
+	done
+ printf "===========================\n"
+}
+
+function userTurn()
+{
+	read -p "Your Turn Enter Position Row" row
+	read -p "Your Turn Enter Position Cloumn" cols
+
+	isValidTurns=$( isValidTurn $gameBoard  $row $cols) 
+	if [ isValidTurns ]
+	then
+		gameBoard[$row,$cols]=$PLAYER_SYMBOL
+	else
+		userTurn $gameBoard
+	fi
+}
+
+function isValidTurn()
+{
+	gameBoard=$1
+	row=$2
+	cols=$3
+	if [ $gameBoard[$row,$cols] == EMPTY ]
+	then
+		echo true
+	else
+		echo false
+	fi
+}
+
+#function checkWin()
+#{
+#	gameBoard=$1
+#	PLAYER_SYMBOL=$2
+#	if [[ gameBoard[$0,$0]==$PLAYER_SYMBOL]] && [[gameBoard[$1,$1]==$PLAYER_SYMBOL]] && [[gameBoard[$2,$2]==$PLAYER_SYMBOL ]]
+#then
+#	echo true
+#	fi
+#
+#	if [[ gameBoard[$2,$0]==$PLAYER_SYMBOL ]] && [[ gameBoard[$1,$1]==$PLAYER_SYMBOL ]] && [[ gameBoard[$0,$2]==$PLAYER_SYMBOL ]]
+#	then
+#	echo true
+#	fi
+#
+#	for ((j=0 ; j <3 ; j++))
+#	do 
+#		if [[ gameBoard[$j,$0]==$PLAYER_SYMBOL]] && [[gameBoard[$j,$1]==$PLAYER_SYMBOL]] && [[gameBoard[$j,$2]==$PLAYER_SYMBOL ]]
+#		then
+#			echo true
+#		fi
+#
+#		if [[ gameBoard[$0,$j]==$PLAYER_SYMBOL]] && [[gameBoard[$1,$j]==$PLAYER_SYMBOL]] && [[gameBoard[$2,$j]==$PLAYER_SYMBOL ]]
+#		then
+#			echo true
+#		fi
+#	done
+#	echo false
+#}
+
+
+function ticTacToe()
+{
+	
+	for ((k=1;k<=$num;k++))
+	do
+		if [ userTurn ]
+		then
+			userTurn $gameBoard
+		#	userTurn=false
+			displayBoard $gameBoard
+		#	checkWins=$(checkWin $gameBoard $PLAYER_SYMBOL) 
+		#	if [ checkWins ]
+		#	then
+		#		echo "You Won"
+		#	fi
+		fi
+	done
+  echo "Match Draw"
+}
+
+initalizingBoard
+symbolAssignment
