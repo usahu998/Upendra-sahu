@@ -1,0 +1,26 @@
+ #!/bin/bash -x
+ 2 echo "enter wor d with things"
+ 3 read word
+ 4 #pat=[a-zA-Z]{3}]
+ 5 #pat=^[1-9]*
+ 6 #pat=[a-zA-Z0-9]*$
+ 7 #pat=^[0-9]*[a-zA-Z]{3}[a-zA-Z0-9]*$
+ 8 #pat="^[0-9]{3}\s[0-9]{3}$"
+ 9 #pat="[0-9]{3}[ ]?[0-9]{3}$"
+10 #pat="^[0-9]{3}\s[0-9]{3}$ | ^[0-9]{3}$[0-9]{3}$ "
+11
+12 pat="[a-zA-Z0-9]"
+13 pat="[a-zA-Z0-9_.+-]* "
+14 pat="@[a-zA-Z0-9]+"
+15 pat="[.a-zA-Z]{2}$"
+16 pat="[a-zA-Z0-9][a-zA-Z0-9_.+-]*@[a-zA-Z0-9]+([.][a-zA-Z]{2,4}$)[.a-zA-Z]$
+17 pat="([.][a-zA-Z]{2,4}$)?{1,}"
+18 pat=^[a-zA-Z0-9]*[+_-.]?[a-zA-Z0-9]*[@][a-zA-Z0-9]$+[.][a-z]{2,3}$*[.]?[a$
+19 if [[ $word =~ $pat ]];
+20 then
+21         echo yes;
+22 else
+23         echo no;
+24 fi
+25
+26
