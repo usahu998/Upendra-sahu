@@ -1,0 +1,80 @@
+public class PrintArray <X,Y,Z> {
+    X[] myXArray;
+    Y[] myYArray;
+    Z[] myZArray;
+
+    public PrintArray(X[] myXArray, Y[] myYArray, Z[] myZArray) {
+        this.myXArray = myXArray;
+        this.myYArray = myYArray;
+        this.myZArray = myZArray;
+    }
+
+    public static void main(String[] args) {
+
+        Integer intArray[] = {1, 2};
+        Double doubleArray[] = {2.0, 4.4};
+        Character charArray[] = {'a', 'b'};
+
+        printArray(intArray);
+        printArray(doubleArray);
+        printArray(charArray);
+        new PrintArray<Integer,Double,Character>(intArray,doubleArray,charArray).printArray();
+    }
+
+    private void printArray() {
+        printArray(myXArray);
+        printArray(myYArray);
+        printArray(myZArray);
+    }
+
+    private static <E> void printArray(E[] charArray) {
+        for (E i : charArray) {
+            System.out.println(i);
+        }
+    }
+}
+
+////////////////////////////////////////////////////////////////////////
+
+import java.lang.reflect.Array;
+import java.util.Arrays;
+
+public class ObjectArraySort {
+    public static void main(String[] args) {
+        Object max= (Object) maximum(12,32,54,2323,5,342);
+        System.out.println(max);
+    }
+
+    private static Object maximum(Object ... a) {
+        Arrays.sort(a);
+        return a[a.length-1];
+    }
+}
+
+//////////////////////////////////////////////////////////////////////
+package com.generic;
+
+public class MaxNumber {
+    public Integer findMax(Integer num1, Integer num2, Integer num3) {
+        return (num1>num2?num1:num1>num3?num1:num2>num3?num2:num3);
+    }
+}
+
+..............
+import com.generic.MaxNumber;
+import org.junit.Assert;
+import org.junit.Test;
+
+public class MaxNumberTest {
+
+    @Test
+    public void maximun_IntegerNumber()
+    {
+        MaxNumber maxNumber = new MaxNumber();
+        Integer max=maxNumber.findMax(1,2,3);
+        Assert.assertEquals((Integer) 3,max);
+    }
+}
+
+
+
