@@ -1,0 +1,36 @@
+  @Test
+    public void submitForm() throws ParseException {
+
+     File testUploadFile = new File("/home/admin1/IdeaProjects/FundooPush/src/test/resources/ganeshJi");
+
+        Response response = RestAssured.given()
+                //.contentType(ContentType.)
+                .accept(ContentType.JSON)
+                .header("token", "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJkYXRhIjp7Il9pZCI6IjVlMDk4MmM1NGQyMjY3MDAzMjUzMGYwZCJ9LCJpYXQiOjE1Nzc3MDY2NDEsImV4cCI6MTU3Nzc5MzA0MX0.9JKbTAEprwx33d7WHSK1y35cHa53JipAjKPhDk1Dow8")
+                .formParam("image","@/home/admin1/IdeaProjects/FuPush/src/test/resources/ganeshJi.jpeg")
+                .formParam("title", "ganesh")
+                .formParam("description", "god ganesh")
+                .formParam("redirect_link",  "www.google.com")
+              /*  .formParam("is_published",false)
+                .formParam("archive", false)
+                .formParam("youtube_flag", false)
+                .formParam("youtube_url",false)
+                .formParam("video_link",false)*/
+               // .multiPart(testUploadFile)
+                .when()
+                .post("https://fundoopush-backend-dev.bridgelabz.com/redirects");
+             int statusCode = response.getStatusCode();
+
+        ResponseBody body = response.getBody();
+        JSONObject object = (JSONObject) new JSONParser().parse(body.prettyPrint());
+        boolean status = (boolean) object.get("status");
+        String message = (String) object.get("message");
+       /* System.out.println(body.prettyPrint());*/
+
+        System.out.println("Redirect Successfull..." + statusCode);
+
+        Assert.assertEquals(200, statusCode);       // response.then().
+   Assert.assertEquals("",message);
+ //   Assert.assertTrue(status);
+
+    }
